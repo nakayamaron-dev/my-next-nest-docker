@@ -1,14 +1,16 @@
 FROM node:16.18.0-alpine as build
 WORKDIR /build
 
+# 必要なファイルをコピーしてくる。
 COPY package.json ./
 COPY tsconfig.base.json ./
 COPY yarn.lock ./
 COPY nx.json ./
 
+# Install Modules
 RUN yarn install
 
-# build
+# Build
 COPY ./apps/frontend ./apps/frontend
 COPY ./libs ./libs
 RUN npx nx run frontend:build
