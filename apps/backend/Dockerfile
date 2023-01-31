@@ -8,6 +8,8 @@ COPY yarn.lock ./
 COPY nx.json ./
 
 # Install Modules
+RUN apk add --update python3 make g++\
+   && rm -rf /var/cache/apk/*
 RUN yarn install
 
 # Build
